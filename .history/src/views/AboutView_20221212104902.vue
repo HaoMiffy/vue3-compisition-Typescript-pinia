@@ -1,0 +1,75 @@
+<template>
+  <div class="about">
+    <h1>This is an about page</h1>
+    <h2>{{ max }}</h2>
+    <button @click="click()">count number:{{ counter.count }}</button>
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in data" :key="item.id">
+            <td>
+              {{ item.id }}
+            </td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td>
+              <button @click="remove(index)">刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, reactive } from 'vue'
+
+const max = ref("Miffy")
+const counter = reactive({ count: 999 })
+
+
+const data = reactive([
+  {
+    id: 123,
+    name: "Miffy"
+  },
+  {
+    id: 456,
+    name: "Miffy"
+  },
+  {
+    id: 789,
+    name: "Miffy"
+  }
+])
+
+function click() {
+  counter.count++
+}
+
+function remove(index: number) {
+  data.splice(index, 1);
+  console.log(data)
+}
+
+
+
+</script>
+
+<style>
+.table {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
